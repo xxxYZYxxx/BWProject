@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--开启扫描包-->
+    <context:component-scan base-package="com.yzy.shop"></context:component-scan>
+
+    <!--读取配置文件中的数据-->
+    <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
+
+    <!--配置数据源-->
+    <bean id="basicDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+
+        <property name="driverClassName" value="${db.driver}"></property>
+        <property name="url" value="${db.url}"></property>
+        <property name="username" value="${db.username}"></property>
+        <property name="password" value="${db.password}"></property>
+
+    </bean>
+
+    <!--配置mybatis需要的会话工厂-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+
+        <!--注入数据源对象-->
+        <property name="dataSource" ref="basicDataSource"></property>
+        <property name="mapperLocations" value="classpath:com/yzy/shop/*.xml"></property>
+
+    </bean>
+
+    <!--mybatis扫描器的配置-->
+    <bean id="configurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+
+        <!--扫描持久层接口，并且通过代理模式创建出每个接口对应的代理对象，并交由spring管理-->
+        <property name="basePackage" value="com.yzy.shop.mapper"></property>
+
+    </bean>
+
+
+
+</beans>

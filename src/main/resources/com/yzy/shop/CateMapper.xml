@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yzy.shop.mapper.CateMapper">
+
+    <!--建立属性和表字段的对应关系-->
+    <resultMap id="CateVo" type="com.yzy.shop.pojo.Cate">
+
+        <!--主键字段的匹配-->
+        <id column="cid" property="cid"></id>
+
+        <!--非主键字段的匹配-->
+        <result column="cate_name" property="cateName"></result>
+
+
+    </resultMap>
+
+
+    <!--查询所有的商品信息-->
+    <select id="getCateList" resultMap="CateVo">
+
+        select * from ssm_cate
+
+    </select>
+
+</mapper>

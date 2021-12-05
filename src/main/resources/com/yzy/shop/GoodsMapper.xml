@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yzy.shop.mapper.GoodsMapper">
+
+    <!--建立属性和表字段的对应关系-->
+    <resultMap id="goodsVo" type="com.yzy.shop.pojo.Goods">
+
+        <!--主键字段的匹配-->
+        <id column="gid" property="gid"></id>
+
+        <!--非主键字段的匹配-->
+        <result column="goods_name" property="goodsName"></result>
+        <result column="price" property="price"></result>
+        <result column="up_time" property="upTime"></result>
+        <result column="brand_id" property="brandId"></result>
+        <result column="cate_id" property="cateId"></result>
+        <result column="goods_desc" property="goodsDesc"></result>
+        <result column="num" property="num"></result>
+
+    </resultMap>
+
+
+    <!--查询所有的商品信息-->
+    <select id="getGoodsList" parameterType="hashmap" resultMap="goodsVo">
+
+        select * from ssm_goods limit #{startIndex},#{pageSize}
+
+    </select>
+
+    <!--查询指定商品信息-->
+    <select id="getCertainGoodsList" resultMap="goodsVo">
+        select * from ssm_goods where goods_name like concat(concat('%',#{goodsName}),'%') limit #{startIndex},#{pageSize}
+    </select>
+    <!--根据商品名称查询商品-->
+    <select id="findGoodsByName" parameterType="string" resultMap="goodsVo">
+
+        select * from ssm_goods where goods_name = #{goodsName}
+
+    </select>
+
+    <!--库存加一-->
+    <update id="addNum" parameterType="java.lang.Integer">
+
+        update ssm_goods set num = num + 1 where gid = #{gid}
+
+    </update>
+
+    <!--执行添加-->
+    <insert id="addGoods" parameterType="com.yzy.shop.pojo.Goods">
+
+        insert into ssm_goods(goods_name,price,up_time,brand_id,cate_id,goods_desc,num)values(
+            #{goodsName},
+            #{price},
+            #{upTime},
+            #{brandId},
+            #{cateId},
+            #{goodsDesc},
+            #{num}
+        )
+
+    </insert>
+
+    <!--获取商品的总记录条数-->
+    <select id="getCount" resultType="int">
+
+        select count(*) from ssm_goods
+
+    </select>
+
+    <!--删除商品-->
+    <delete id="deleteGoods" parameterType="java.lang.Integer">
+        delete from ssm_goods where gid=#{gid}
+    </delete>
+</mapper>

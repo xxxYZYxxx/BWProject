@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yzy.shop.mapper.BrandMapper">
+
+    <!--建立属性和表字段的对应关系-->
+    <resultMap id="brandVo" type="com.yzy.shop.pojo.Brand">
+
+        <!--主键字段的匹配-->
+        <id column="bid" property="bid"></id>
+
+        <!--非主键字段的匹配-->
+        <result column="brand_name" property="brandName"></result>
+
+
+    </resultMap>
+
+
+    <!--查询所有的商品信息-->
+    <select id="getBrandList" resultMap="brandVo">
+
+        select * from ssm_brand
+
+    </select>
+
+</mapper>
