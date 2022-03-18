@@ -35,7 +35,35 @@
     }
     //删除商品
     function deleteGoods(gid){
-        location.href="<%=path%>/goods/deleteGoods?gid="+gid
+        $.ajax({
+
+            url : "<%=path%>/goods/deleteGoods?gid="+gid,
+
+            type : "post",
+
+            data : $("form").serialize(),
+
+            success:function (obj){
+
+                if (obj == "1"){
+
+                    alert("删除成功！")
+
+                    location.href = "<%=path%>/goods/list";
+
+                }else if (obj == "0"){
+
+                    alert("删除失败！")
+
+                    location.href = "<%=path%>/goods/list";
+
+                }
+
+            },
+
+            dataType: "json"
+
+        })
     }
 
     //跳转添加页面

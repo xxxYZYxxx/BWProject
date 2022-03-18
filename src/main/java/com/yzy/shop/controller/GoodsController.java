@@ -83,6 +83,8 @@ public class GoodsController {
         return goodsService.deleteGoods(gid);
     }
 
+
+
     /**
      * 实现商品列表
      * @param model

@@ -115,6 +115,12 @@
 
     }
 
+    function toHome(){
+
+        location.href = "<%=path%>/goods/list"
+
+    }
+
 </script>
 
 <body class="back">
