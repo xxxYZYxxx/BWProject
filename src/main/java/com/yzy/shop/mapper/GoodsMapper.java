@@ -32,4 +32,6 @@ public interface GoodsMapper {
     int getGoodsCount(Integer gid);
 
     Integer subtractNum(Integer gid);
+
+    int deleteGoodsByIds(List<String> strings);
 }

@@ -89,4 +89,12 @@
     <update id="subtractNum" parameterType="Integer">
         update ssm_goods set num=num-1 where gid=#{gid}
     </update>
+
+    <!--批量删除-->
+    <delete id="deleteGoodsByIds" parameterType="java.lang.String">
+        delete from ssm_goods where gid in
+        <foreach collection="list" item="idItem" open="(" separator="," close=")">
+            #{idItem}
+        </foreach>
+    </delete>
 </mapper>

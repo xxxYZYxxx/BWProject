@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -129,6 +130,18 @@ public class GoodsServiceImpl implements GoodsService {
             return goodsMapper.subtractNum(gid);
         }else{
             return 0;
+        }
+    }
+
+    @Override
+    public boolean deleteGoodsByIds(String ids) {
+        String[] split = ids.split(",");
+        List<String> strings = Arrays.asList(split);
+        int num=goodsMapper.deleteGoodsByIds(strings);
+        if(num>0){
+            return true;
+        }else{
+            return false;
         }
     }
 

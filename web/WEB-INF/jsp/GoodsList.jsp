@@ -119,6 +119,47 @@
         })
     }
 
+    //批量删除
+    function deleteGoodsByIds(){
+        //获取被选中多选框
+        if($(".cks:checked").length>0){
+            if(confirm("确定要删除指定商品吗？")){
+                let ids="";
+                $(".cks:checked").each(function (){
+                    ids+=","+$(this).val();
+                })
+                ids=ids.substring(1);
+                $.ajax({
+                    url:"<%=path%>/goods/deleteGoodsByIds",
+                    type:"post",
+                    data:{
+                        ids:ids
+                    },
+                    success:function (obj){
+                        if(obj){
+                            alert("删除成功！")
+                            location.href="<%=path%>/goods/list"
+                        }
+                        else{
+                            alert("删除失败！")
+                            location.href="<%=path%>/goods/list"
+                        }
+                    },
+                    dataType:"json"
+                })
+            }
+        }else{
+            alert("请至少选择一条数据！")
+        }
+    }
+
+    //文本就绪函数 全选全不选
+    $(function (){
+        $("#checkbox").click(function (){
+            $(".cks").prop("checked",this.checked);
+        })
+    })
+
 </script>
 
 <body>
@@ -132,9 +173,11 @@
     <tr>
         <td colspan="12" align="center">
             <div class="form-group">
-            <input type="button" value="商品上架" class="btn btn-info" onclick="toAdd()">
+                <input type="button" value="商品上架" class="btn btn-info" onclick="toAdd()">
             </div>
-
+            <div>
+                <input type="button" value="删除商品" class="btn btn-info" onclick="deleteGoodsByIds()">
+            </div>
             <form action="<%=path%>/goods/certainlist" method="post" class="form-horizontal" role="form" style="margin-top: 20px">
             <div class="form-group">
                 <div class="col-sm-6">
@@ -148,6 +191,7 @@
     </tr>
 
     <tr>
+        <th>全选/全不选<input type="checkbox" id="checkbox"> </th>
         <th>商品名称</th>
         <th>商品价格</th>
         <th>上架时间</th>
@@ -161,6 +205,7 @@
     <c:forEach items="${goodsList}" var="goods">
 
         <tr>
+            <td><input type="checkbox" class="cks" value="${goods.gid}"></td>
             <td>${goods.goodsName}</td>
             <td>${goods.price}</td>
             <td>${goods.upTime}</td>

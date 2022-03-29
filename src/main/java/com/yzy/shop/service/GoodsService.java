@@ -27,4 +27,6 @@ public interface GoodsService {
     Integer addNum(Integer gid);
 
     Integer subtractNum(Integer gid);
+
+    boolean deleteGoodsByIds(String ids);
 }

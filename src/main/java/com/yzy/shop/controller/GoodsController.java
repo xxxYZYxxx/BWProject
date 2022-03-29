@@ -172,5 +172,10 @@ public class GoodsController {
         return "CertainGoodsList";
     }
 
+    @RequestMapping("/deleteGoodsByIds")
+    @ResponseBody
+    public boolean deleteGoodsByIds(String ids){
+        return goodsService.deleteGoodsByIds(ids);
+    }
 
 }
