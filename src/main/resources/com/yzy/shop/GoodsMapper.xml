@@ -74,4 +74,19 @@
     <delete id="deleteGoods" parameterType="java.lang.Integer">
         delete from ssm_goods where gid=#{gid}
     </delete>
+
+    <!--按下按钮给库存加一-->
+    <update id="addNumButton" parameterType="java.lang.Integer">
+        update ssm_goods set num=num+1 where gid=#{gid}
+    </update>
+
+    <!--查询库存数量-->
+    <select id="getGoodsCount" parameterType="Integer" resultType="Integer">
+        select num from ssm_goods where gid=#{gid}
+    </select>
+
+    <!--给库存减1-->
+    <update id="subtractNum" parameterType="Integer">
+        update ssm_goods set num=num-1 where gid=#{gid}
+    </update>
 </mapper>

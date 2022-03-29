@@ -83,7 +83,27 @@ public class GoodsController {
         return goodsService.deleteGoods(gid);
     }
 
+    /**
+     * 给库存加一
+     * @param gid
+     * @return
+     */
+    @RequestMapping("/addNum")
+    @ResponseBody
+    public Integer addNum(Integer gid){
+        return goodsService.addNum(gid);
+    }
 
+    /**
+     * 给库存减1
+     * @param gid
+     * @return
+     */
+    @RequestMapping("/subtractNum")
+    @ResponseBody
+    public Integer subtractNum(Integer gid){
+        return goodsService.subtractNum(gid);
+    }
 
     /**
      * 实现商品列表
@@ -151,5 +171,6 @@ public class GoodsController {
 
         return "CertainGoodsList";
     }
+
 
 }

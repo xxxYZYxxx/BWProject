@@ -26,4 +26,10 @@ public interface GoodsMapper {
     boolean deleteGoods(Integer gid);
 
     List<Goods> getCertainGoodsList(@Param("goodsName")String goodsName,@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
+
+    Integer addNumButton(Integer gid);
+
+    int getGoodsCount(Integer gid);
+
+    Integer subtractNum(Integer gid);
 }

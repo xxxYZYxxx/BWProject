@@ -116,5 +116,21 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsMapper.getCertainGoodsList(goodsName,startIndex,pageSize);
     }
 
+    @Override
+    public Integer addNum(Integer gid) {
+        return goodsMapper.addNumButton(gid);
+    }
+
+    @Override
+    public Integer subtractNum(Integer gid) {
+        //查询库存数量
+        int goodsCount=goodsMapper.getGoodsCount(gid);
+        if(goodsCount>0){
+            return goodsMapper.subtractNum(gid);
+        }else{
+            return 0;
+        }
+    }
+
 
 }

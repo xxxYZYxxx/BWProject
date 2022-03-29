@@ -23,4 +23,8 @@ public interface GoodsService {
     boolean deleteGoods(Integer gid);
 
     List<Goods> getCertainGoodsList(@Param("goodsName")String goodsName,@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
+
+    Integer addNum(Integer gid);
+
+    Integer subtractNum(Integer gid);
 }

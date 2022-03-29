@@ -79,6 +79,45 @@
         location.href = "<%=path%>/goods/list?currentPage="+currentPage;
     }
 
+    //加库存
+    function addNum(gid){
+        $.ajax({
+            url:"<%=path%>/goods/addNum",
+            type:"post",
+            data:{
+                gid:gid
+            },
+            success:function (obj){
+                if(obj==1){
+                    location.href="<%=path%>/goods/list"
+                }else{
+                    alert("添加库存失败")
+                    location.href="<%=path%>/goods/list"
+                }
+            },
+            dataType: "text"
+        })
+    }
+
+    //减库存
+    function subtractNum(gid){
+        $.ajax({
+            url:"<%=path%>/goods/subtractNum",
+            type:"post",
+            data:{
+                gid:gid
+            },
+            success:function (obj){
+                if(obj==1){
+                    location.href="<%=path%>/goods/list"
+                }else{
+                    alert("减少库存失败，注意库存不能小于0")
+                    location.href="<%=path%>/goods/list"
+                }
+            },
+            dataType:"text"
+        })
+    }
 
 </script>
 
@@ -151,7 +190,11 @@
 
             </td>
             <td>${goods.goodsDesc}</td>
-            <td>${goods.num}</td>
+            <td>
+                <input type="button" value="-" onclick="subtractNum(${goods.gid})">
+                    ${goods.num}
+                <input type="button" value="+" onclick="addNum(${goods.gid})">
+            </td>
             <td>
                 <form action="/BW/goods/list" method="post">
                 <input type="submit" class="btn btn-danger" value="删除"  onclick="deleteGoods(${goods.gid})">
